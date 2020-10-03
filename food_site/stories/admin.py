@@ -1,3 +1,4 @@
 from django.contrib import admin
+from stories.models import Recipe, Category
 
-# Register your models here.
+admin.site.register([Recipe, Category])
