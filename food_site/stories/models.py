@@ -66,3 +66,21 @@ class Comments(models.Model):
     class Meta:
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=250)
+    subject = models.CharField(max_length=250)
+    message = models.TextField(max_length=1000)
+
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Contact"
+        verbose_name_plural = "Contacts"
+
+
+
