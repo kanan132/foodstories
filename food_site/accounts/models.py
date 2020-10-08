@@ -1,12 +1,19 @@
 from django.db import models
 
-class Register(models.Model):
-    STATUS_CHOICES=(
-        (1, ("male")),
-        (2, ("female"))
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    GENDER_CHOICES = (
+        ("Male", ("Male")),
+        ("Female", ("Female"))
     )
-    
-    username = models.CharField(max_length=150)
-    password = models.CharField(max_length=100)
-    choice = models.CharField(max_length=10,choices=STATUS_CHOICES,default=1)
+    bio = models.TextField(max_length=1000, blank=True)
+    profile_img = models.ImageField(upload_to='images')
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=6)
+    email = models.EmailField(max_length=250)
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
     

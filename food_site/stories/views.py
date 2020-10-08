@@ -33,7 +33,7 @@ class ContactView(CreateView):
 class CreateStoryView(CreateView):
     form_class = CreateStoryForm
     template_name = 'create_story.html'
-    success_url = reverse_lazy('stories:create_story')
+    success_url = reverse_lazy('stories:recipe')
 
 class AboutView(TemplateView):
     template_name = 'about.html'
