@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'mxgp3tid#9*domafg7%w8qkd1dk+aosd(**d6ka77!!s$ee!(!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.environ.get('DEBUG', False)
+PROD = not DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Base url to serve media files
@@ -89,17 +90,28 @@ WSGI_APPLICATION = 'food_site.wsgi.application'
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
 
-
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'food_stories',
-            'USER': 'kenan',
-            'PASSWORD': '12345',
-            'PORT': '5432',
-            'HOST': '127.0.0.1'
-            },
-    }
+if PROD:
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'USER': os.environ.get('POSTGRES_USER'),
+                'NAME': os.environ.get('POSTGRES_DB'),
+                'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+                'HOST': os.environ.get('POSTGRES_HOST'),
+                'PORT': os.environ.get('POSTGRES_PORT'),
+                },
+        }
+else:
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'food_stories',
+                'USER': 'kenan',
+                'PASSWORD': '12345',
+                'PORT': '5432',
+                'HOST': '127.0.0.1'
+                },
+        }
 
 
 # Password validation
@@ -140,6 +152,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+if PROD:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
