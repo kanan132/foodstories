@@ -69,3 +69,15 @@ class Contact(models.Model):
 
 
 
+class Subscribe(models.Model):
+    email = models.EmailField(max_length=250, unique=True)
+
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Subscribe"
+        verbose_name_plural = "Subscribes"
+
+    def __str__(self):
+        return f"{self.email}"
