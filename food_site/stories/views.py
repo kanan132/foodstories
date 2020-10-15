@@ -20,7 +20,7 @@ class RecipeListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['now'] = "now"
+        context['now'] = "asdasdasd"
         return context
 
 
@@ -38,6 +38,10 @@ class CreateStoryView(CreateView):
 class AboutView(TemplateView):
     template_name = 'about.html'
 
-class IndexView():
-    pass
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
