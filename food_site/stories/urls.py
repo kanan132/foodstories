@@ -5,7 +5,7 @@ from .views import RecipeListView, ContactView, AboutView, CreateStoryView, Inde
 app_name = "stories"
 
 urlpatterns = [
-    path('', IndexView, name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('recipes/', RecipeListView.as_view(), name='recipe'),
     path('contacts/', ContactView.as_view(), name='contact'),
     path('create-story/', CreateStoryView.as_view(), name='create_story'),
