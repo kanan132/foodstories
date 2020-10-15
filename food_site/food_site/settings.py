@@ -41,14 +41,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 # Application definition
 
 INSTALLED_APPS = [
-    'stories.apps.StoriesConfig',
-    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local apps
+    'stories.apps.StoriesConfig',
+    'accounts.apps.AccountsConfig',
+
+    # third party modules
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
